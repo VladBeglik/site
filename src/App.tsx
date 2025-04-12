@@ -72,14 +72,13 @@ function App() {
                             </div>
                         </div>
                     </section>
-                    <ImageSlider/>
-                    <section className="grid grid-cols-1 sm:grid-cols-2 h-[40vh] sm:h-[50vh] md:h-[70vh] w-full">
+                    <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 h-[40vh] sm:h-[50vh] md:h-[70vh] w-full">
                         {/* Левая картинка */}
                         <Link to="/collection-2025" className="relative group cursor-pointer overflow-hidden">
                             <div className="relative w-full h-full">
                                 <img
                                     src={`${import.meta.env.BASE_URL}/img.png`}
-                                    alt="Коллекция 2025"
+                                    alt="Диваны"
                                     className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                                 />
                                 <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -89,17 +88,32 @@ function App() {
                             </div>
                         </Link>
 
+                        {/* Средняя картинка */}
+                        <Link to="/another-page" className="relative group cursor-pointer overflow-hidden">
+                            <div className="relative w-full h-full">
+                                <img
+                                    src={`${import.meta.env.BASE_URL}/img11.png`}
+                                    alt="Кровати"
+                                    className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                                />
+                                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                <div className="absolute inset-0 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <h2 className="text-xl sm:text-2xl md:text-3xl font-bold">Кровати</h2>
+                                </div>
+                            </div>
+                        </Link>
+
                         {/* Правая картинка */}
                         <Link to="/another-page" className="relative group cursor-pointer overflow-hidden">
                             <div className="relative w-full h-full">
                                 <img
                                     src={`${import.meta.env.BASE_URL}/img11.png`}
-                                    alt="Новая коллекция"
+                                    alt="Стулья"
                                     className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                                 />
                                 <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 <div className="absolute inset-0 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <h2 className="text-xl sm:text-2xl md:text-3xl font-bold">Новая коллекция</h2>
+                                    <h2 className="text-xl sm:text-2xl md:text-3xl font-bold">Стулья</h2>
                                 </div>
                             </div>
                         </Link>

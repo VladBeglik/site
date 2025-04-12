@@ -1,94 +1,82 @@
 import { useState } from "react";
-import { FaUpload } from "react-icons/fa";
 
 export default function RequestForm() {
     const [name, setName] = useState("");
-    const [phone, setPhone] = useState("");
+    const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
-    const [file, setFile] = useState<File | null>(null);
-    const [preview, setPreview] = useState<string | null>(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setIsSubmitting(true);
+        
+        // Имитация отправки формы
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        setIsSubmitting(false);
         alert("Заявка отправлена!");
-    };
-
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files.length > 0) {
-            const selectedFile = e.target.files[0];
-            setFile(selectedFile);
-            setPreview(URL.createObjectURL(selectedFile));
-        }
+        setName("");
+        setEmail("");
+        setMessage("");
     };
 
     return (
-        <section className="flex justify-center items-center min-h-screen bg-white">
-            <div className="w-full max-w-lg">
-                <h2 className="text-2xl font-bold mb-1">Задайте нам вопрос</h2>
-                <p className="text-gray-500 text-sm mb-6">
-                    или свяжитесь для сотрудничества
-                </p>
-
-                <form className="space-y-6" onSubmit={handleSubmit}>
-                    <div>
-                        <label className="block text-lg font-semibold mb-2">Как вас зовут?</label>
-                        <input
-                            type="text"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            className="w-full border-b-2 border-black outline-none py-2 text-lg"
-                        />
+        <section className="py-16 sm:py-24">
+            <div className="container mx-auto px-4 sm:px-6">
+                <div className="max-w-3xl mx-auto">
+                    <div className="text-center mb-12">
+                        <h2 className="text-3xl sm:text-4xl font-bold mb-4">Задайте нам вопрос</h2>
+                        <p className="text-gray-600 text-lg">
+                            или свяжитесь для сотрудничества
+                        </p>
                     </div>
 
-                    <div>
-                        <label className="block text-lg font-semibold mb-2">Ваш контактный номер телефона</label>
-                        <input
-                            type="tel"
-                            value={phone}
-                            onChange={(e) => setPhone(e.target.value)}
-                            className="w-full border-b-2 border-black outline-none py-2 text-lg"
-                        />
-                    </div>
-
-                    <div>
-                        <label className="block text-lg font-semibold">Ваше сообщение</label>
-                        <textarea
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
-                            className="w-full border-b-2 border-black outline-none py-2 text-lg h-24 resize-none"
-                        ></textarea>
-                    </div>
-
-                    <div>
-                        <label className="block text-lg font-semibold mb-2">Прикрепите фото</label>
-                        <div className="relative w-full border-b-2 border-black py-2 flex items-center justify-center cursor-pointer">
+                    <form className="space-y-8 p-8 sm:p-12" onSubmit={handleSubmit}>
+                        <div className="space-y-2">
+                            <label className="block text-sm font-medium text-gray-700">Как вас зовут?</label>
                             <input
-                                type="file"
-                                accept="image/*"
-                                onChange={handleFileChange}
-                                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                type="text"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                required
+                                className="w-full border-b-2 border-black outline-none py-3 text-xl"
+                                placeholder="Введите ваше имя"
                             />
-                            <FaUpload className="text-black mr-2" />
-                            <span className="text-black">{file ? "Файл загружен" : "Загрузить фото"}</span>
                         </div>
-                        {preview && (
-                            <div className="mt-4">
-                                <img
-                                    src={preview}
-                                    alt="Preview"
-                                    className="w-full h-40 object-cover border rounded-lg shadow"
-                                />
-                            </div>
-                        )}
-                    </div>
 
-                    <button
-                        type="submit"
-                        className="mt-4 px-6 py-2 bg-white border border-black text-black transition-colors duration-300 hover:bg-black hover:text-white"
-                    >
-                        Отправить →
-                    </button>
-                </form>
+                        <div className="space-y-2">
+                            <label className="block text-sm font-medium text-gray-700">Ваш контактный e-mail</label>
+                            <input
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                                className="w-full border-b-2 border-black outline-none py-3 text-xl"
+                                placeholder="example@email.com"
+                            />
+                        </div>
+
+                        <div className="space-y-2">
+                            <label className="block text-sm font-medium text-gray-700">Ваше сообщение</label>
+                            <textarea
+                                value={message}
+                                onChange={(e) => setMessage(e.target.value)}
+                                required
+                                className="w-full border-b-2 border-black outline-none py-3 text-xl h-32 resize-none"
+                                placeholder="Опишите ваш вопрос или предложение"
+                            ></textarea>
+                        </div>
+
+                        <button
+                            type="submit"
+                            disabled={isSubmitting}
+                            className={`px-8 py-4 border border-black text-black transition duration-300 hover:bg-black hover:text-white text-xl
+                                ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                        >
+                            {isSubmitting ? 'Отправка...' : 'Отправить →'}
+                        </button>
+                    </form>
+                </div>
             </div>
         </section>
     );

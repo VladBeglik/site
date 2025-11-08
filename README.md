@@ -1,54 +1,78 @@
-# React + TypeScript + Vite
+# Сайт мебельной компании
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Современный веб-сайт для мебельной компании с галереей проектов и админ панелью для управления контентом.
 
-Currently, two official plugins are available:
+## 🚀 Возможности
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Главная страница** с презентацией компании и галереей проектов
+- **Галерея проектов** с категориями: Диваны, Кровати, Стулья
+- **Админ панель** для загрузки и управления изображениями
+- **Адаптивный дизайн** для всех устройств
+- **Современный UI/UX** с анимациями и переходами
 
-## Expanding the ESLint configuration
+## 📁 Структура проекта
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```
+src/
+├── Components/
+│   ├── HomePage.tsx          # Главная страница
+│   ├── Navigation.tsx        # Навигация
+│   ├── ProjectsGallery.tsx   # Галерея проектов
+│   ├── AdminPanel.tsx        # Админ панель
+│   └── ...
+├── utils/
+│   └── imageUtils.ts         # Утилиты для работы с изображениями
+└── ...
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🛠️ Технологии
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **React 19** с TypeScript
+- **Vite** для сборки
+- **Tailwind CSS** для стилизации
+- **React Router** для навигации
+- **Lucide React** для иконок
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+## 🚀 Запуск проекта
+
+```bash
+# Установка зависимостей
+npm install
+
+# Запуск в режиме разработки
+npm run dev
+
+# Сборка для продакшена
+npm run build
 ```
+
+## 🔐 Доступ к админ панели
+
+Админ панель доступна только по прямой ссылке:
+- **URL**: `http://localhost:5173/admin`
+- **Функции**: Загрузка изображений, управление категориями, предварительный просмотр
+
+### Возможности админ панели:
+- ✅ Загрузка множественных изображений
+- ✅ Автоматическое сжатие больших файлов
+- ✅ Валидация типов файлов
+- ✅ Предварительный просмотр
+- ✅ Организация по категориям
+- ✅ Статистика загруженных файлов
+
+## 📸 Управление изображениями
+
+Изображения хранятся в папке `public/projects/`:
+- `sofas/` - изображения диванов
+- `chairs/` - изображения стульев  
+- `beds/` - изображения кроватей
+
+Поддерживаемые форматы: JPG, PNG, GIF, WebP
+Максимальный размер: 10MB (автоматическое сжатие для файлов >2MB)
+
+## 📝 Разработка
+
+Проект использует современные инструменты разработки:
+- **ESLint** для проверки кода
+- **TypeScript** для типобезопасности
+- **Vite** для быстрой разработки с HMR

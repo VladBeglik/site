@@ -54,15 +54,18 @@ const ImageSlider = () => {
         ],
     };
 
+    const normalize = (p: string) => p.replace(/^\//,'');
+    const withBase = (p: string) => `${import.meta.env.BASE_URL}${normalize(p)}`;
+
     const slides = [
         {
-            img: `${import.meta.env.BASE_URL}/img11.png`,
+            img: withBase('/projects/sofas/sofas-001.jpg'),
             alt: "Коллекция 2025",
             link: "/collection-2025",
             text: "Кровати",
         },
         {
-            img: `${import.meta.env.BASE_URL}/img1111.png`,
+            img: withBase('/projects/beds/beds-001.png'),
             alt: "Кровати",
             link: "/another-page",
             text: "Диваны",
@@ -79,6 +82,12 @@ const ImageSlider = () => {
                                 src={slide.img}
                                 alt={slide.alt}
                                 className="w-full h-full object-cover object-center"
+                                onError={(e) => {
+                                    const img = e.currentTarget as HTMLImageElement;
+                                    if ((img as any).dataset.fallbackApplied === '1') return;
+                                    (img as any).dataset.fallbackApplied = '1';
+                                    img.src = `/${normalize(slide.img.replace(import.meta.env.BASE_URL, ''))}`;
+                                }}
                             />
                             <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             <div className="absolute inset-0 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
